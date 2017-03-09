@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello {{loginid}}</title>
+</head>
+<body style="height:1400px;background:linear-gradient(white, black);">
+<h2 align="center">Personal Organizer</h2>
+<h2 align="center">{{loginid}}'s Homepage</h2>
+<div align="center">
+<table>
+	<form action="/upload_image" method="post" enctype="multipart/form-data">
+        <tr align="center"><td><h3 align="center">Uploading Notes and Images</h3></td></tr><br/>
+		<tr align="center">
+            <td> Upload File : <input type="file" value="Choose image" name="mongoUpload"></td>
+        </tr>
+        <tr align="center">
+            <td> Post Comment : <input type="text" name="postComment"></td>
+        </tr>
+        <tr align="center">
+            <td> Enter Subject : <input type="text" name="tagg" maxlength="40"></td>
+        </tr>
+		<tr align="center">
+            <td> Enter Priority : <input type="text" name="priority"></td>
+        </tr>
+        <tr align="center">
+            <td>
+                <input type="submit" value="Upload">
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+            <td>
+                <input type="hidden" value={{userid}} name="userid">
+            </td>
+        </tr>
+    </form>
+	
+	
+	<form action="/search_image" method="post">
+        <tr align="center"><td><h3 align="center">Searching Notes and Images</h3></td></tr>
+		<tr align="center">
+            <td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+        </tr>
+        <tr align="center">
+            <td><br>
+                Enter the keyword to search:<br>
+                <input type="text" name="tosearch"><input type="submit" value="Search Images">
+            </td>
+        </tr>
+    </form>
+	
+	<form action="/search_time" method="post">
+        <tr align="center"><td><h3 align="center">Searching based on Time</h3></td></tr>
+		<tr align="center">
+            <td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+        </tr>
+        <tr align="center">
+            <td><br>
+                Enter the time difference:<br>
+                <input type="text" name="time_delta"><input type="submit" value="Search Images">
+            </td>
+        </tr>
+    </form>
+	
+	<form action="/view_all" method="post">
+		<tr align="center"><td><h3 align="center">Displaying Notes and Images</h3><br/></td></tr>
+		<tr align="center">
+			<td>
+			<select name = "sortmode">
+				<option value="tags">Sort by Subject</option>
+				<option value="uploadTime">Sort by Time</option>
+				<option value="priority">Sort by Priority</option>
+			</select>
+			<input type="radio" name="sort_order" value="asc"> Ascending
+			<input type="radio" name="sort_order" value="desc"> Descending
+			</td>
+			<td><input type="submit" value = "View {{loginid}}'s Files"></td><br/>
+            <td>
+                <input type="hidden" value={{userid}} name="userid">
+            </td>
+            <td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+        </tr>
+    </form>
+	
+    <form action="/view_notes" method="post">
+        <tr align="center">
+            <td><br>
+                <input type="submit" value = "View {{loginid}}'s Notes">
+            </td>
+			<td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+        </tr>
+    </form>
+
+    <form action="/view_photos" method="post">
+        <tr align="center">
+            <td><br>
+                <input type="submit" value = "View {{loginid}}'s Photos">
+            </td>
+			<td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+        </tr>
+    </form>	
+	
+    <form action="/view_public_images" method="post">
+        <tr align="center">
+            <td><br>
+                <input type="submit" value = "View Public Images"><br/>
+            </td>
+        </tr>
+    </form>
+	
+	
+    <form action="/delete_userchoice" method="post">
+        <tr align="center"><td><h3 align="center">Deleting Notes and Images</h3></td></tr>
+		<tr align="center">
+            <td>
+                <input type="hidden" value={{loginid}} name="loginid">
+            </td>
+        </tr>
+        <tr align="center">
+            <td><br>
+                Enter the keyword to search and delete:<br>
+                <input type="text" name="deletekey">
+				<input type="submit" value="Delete File"><br/>
+            </td>
+        </tr>
+    </form>
+	
+	
+    <form action="/logout" method="post">
+        <tr align="center">
+            <td><br>
+                <input type="submit" value = "Logout">
+            </td>
+        </tr>
+    </form>
+    <br/>
+</table>
+</div>
+
+<div align="center"><h3>Time Statistics</h3></div>
+<div align="center">{{dbtime}}</div>
+<div align="center">{{logintime}}</div>
+<div align="center">{{uploadtime}}</div>
+</body>
+</html>

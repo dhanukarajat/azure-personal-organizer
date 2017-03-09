@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View other files</title>
+</head>
+<body style="height:800px;background:linear-gradient(white, black);">
+<h2 align="center">Personal Organizer</h2>
+<h3>Select the user to view</h3>
+<h3>Users present in the system</h3><br/>
+<ul>
+{% for file in listusers %}
+<li><a href="{{url_for('view_images_for',userid=file.useruid,loginid=file.userloginid)}}">{{file.userloginid}}</a> </li>
+{% endfor %}
+</ul>
+    <form action="/logout" method="post">
+        <tr align="center">
+            <td>
+                <input type="submit" value = "Logout">
+            </td>
+        </tr>
+    </form>
+</body>
+</html>

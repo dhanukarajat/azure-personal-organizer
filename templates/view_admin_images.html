@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Images</title>
+</head>
+<body style="height:2000px;background:linear-gradient(white, black);">
+<h2 align="center">Personal Organizer</h2>
+{% for file in images %}
+<br/>
+<h4>Subject:{{file.imagesTag}} <br/>Priority:{{file.imagesPriority}}</h4>
+<h4>Uploaded by: {{file.imagesUploader}} on: {{file.imagesUploadtime}}</h4>
+{% if file.imagesFiletype == "note" %}
+	{{file.imagesData}}
+{% else %}
+	<img src={{file.imagesData}} width="200" height="200">
+{% endif %}
+<form action="/modify_priority" method = "post">
+    <input type="hidden" name="id" value = {{file.imageID}}>
+    <input type="text" name="mongopriority" placeholder="Enter New priority value"><br/>
+    <input type="submit" value="Modify Priority">
+</form>
+<form action="/modify_tag" method = "post">
+    <input type="hidden" name="id" value = {{file.imageID}}>
+    <input type="text" name="mongotag" placeholder="Enter New subject"><br/>
+    <input type="submit" value="Modify Subject">
+</form>
+<h4>Comments:</h4>
+{% for comment in file.imagesComments %}
+    {{comment}}<br/>
+{% endfor %}
+<form action="/add_comment" method = "post">
+    <input type="hidden" name="id" value = {{file.imageID}}>
+    <input type="text" name="mongocomment" placeholder="Enter new comment"><br/>
+    <input type="submit" value="Add Comment">
+</form>
+
+<form action="/delete_file" method="post">
+    <input type="hidden" name="delete_button" value={{file.imageID}}>
+    <input type="submit" value="Delete File">
+</form>
+{% endfor %}
+<br/>
+
+<div align="center">{{viewtime}}</div>
+<div align="center">{{displaytime}}</div>
+
+    <form action="/logout" method="post">
+        <tr align="center">
+            <td>
+                <input type="submit" value = "Logout">
+            </td>
+        </tr>
+    </form>
+</body>
+</html>
